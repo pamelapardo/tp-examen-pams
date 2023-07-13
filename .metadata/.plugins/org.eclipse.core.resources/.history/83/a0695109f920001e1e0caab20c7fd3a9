@@ -1,0 +1,322 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Atm {
+    private List<BankAccount> bankAccounts;
+
+    public Atm() {
+        bankAccounts = new ArrayList<>();
+    }
+
+    public void start() {
+        Scanner scanner = new Scanner(System.in);
+
+        boolean exit = false;
+        while (!exit) {
+            displayMenu();
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    createAccount();
+                    break;
+                case 2:
+                    checkBalance();
+                    break;
+                case 3:
+                    depositMoney();
+                    break;
+                case 4:
+                    withdrawMoney();
+                    break;
+                case 5:
+                    displayTransactionHistory();
+                    break;
+                case 6:
+                    updateCustomerInfo();
+                    break;
+                case 7:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+
+        System.out.println("Thank you for using the ATM. Goodbye!");
+    }
+
+    private void displayMenu() {
+        System.out.println("ATM Menu");
+        System.out.println("1. Create Account");
+        System.out.println("2. Check Balance");
+        System.out.println("3. Deposit Money");
+        System.out.println("4. Withdraw Money");
+        System.out.println("5. Display Transaction History");
+        System.out.println("6. Update Customer Info");
+        System.out.println("7. Exit");
+        System.out.print("Enter your choice: ");
+    }
+
+    private void createAccount() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+
+        System.out.print("Enter customer's first name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Enter customer's last name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Enter customer's address: ");
+        String address = scanner.nextLine();
+
+        System.out.print("Enter customer's postal code: ");
+        String postalCode = scanner.nextLine();
+
+        System.out.print("Enter customer's city: ");
+        String city = scanner.nextLine();
+
+        System.out.print("Enter initial balance: ");
+        double balance = scanner.nextDouble();
+
+        Customer customer = new Customer(firstName, lastName, address, postalCode, city);
+        BankAccount bankAccount = new BankAccount(accountNumber, customer, balance);
+        bankAccounts.add(bankAccount);
+
+        System.out.println("Account created successfully.");
+    }
+
+    private void checkBalance() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+
+        BankAccount bankAccount = findBankAccount(accountNumber);
+        if (bankAccount != null) {
+            double balance = bankAccount.getBalance();
+            System.out.println("Balance: " + balance);
+        } else {
+            System.out.println("Account not found.");
+        }
+    }
+
+    private void depositMoney() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+
+        BankAccount bankAccount = findBankAccount(accountNumber);
+        if (bankAccount != null) {
+            System.out.print("Enter amount to deposit: ");
+            double amount = scanner.nextDouble();
+
+            bankAccount.deposit(amount);
+            System.out.println("Amount deposited successfully.");
+        } else {
+            System.out.println("Account not found.");
+        }
+    }
+
+    private void withdrawMoney() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+
+        BankAccount bankAccount = findBankAccount(accountNumber);
+        if (bankAccount != null) {
+            System.out.print("Enter amount to withdraw: ");
+            double amount = scanner.nextDouble();
+
+            boolean success = bankAccount.withdraw(amount);
+            if (success) {
+                System.out.println("Amount withdrawn successfully.");
+            } else {
+                System.out.println("Insufficient funds.");
+            }
+        } else {
+            System.out.println("Account not found.");
+        }
+    }
+
+    private void displayTransactionHistory() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+
+        BankAccount bankAccount = findBankAccount(accountNumber);
+        if (bankAccount != null) {
+            List<String> transactionHistory = bankAccount.getTransactionHistory();
+            System.out.println("Transaction History:");
+            for (String transaction : transactionHistory) {
+                System.out.println(transaction);
+            }
+        } else {
+            System.out.println("Account not found.");
+        }
+    }
+
+    private void updateCustomerInfo() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+
+        BankAccount bankAccount = findBankAccount(accountNumber);
+        if (bankAccount != null) {
+            Customer customer = bankAccount.getCustomer();
+
+            System.out.print("Enter customer's new first name: ");
+            String firstName = scanner.nextLine();
+            customer.setFirstName(firstName);
+
+            System.out.print("Enter customer's new last name: ");
+            String lastName = scanner.nextLine();
+            customer.setLastName(lastName);
+
+            System.out.print("Enter customer's new address: ");
+            String address = scanner.nextLine();
+            customer.setAddress(address);
+
+            System.out.print("Enter customer's new postal code: ");
+            String postalCode = scanner.nextLine();
+            customer.setPostalCode(postalCode);
+
+            System.out.print("Enter customer's new city: ");
+            String city = scanner.nextLine();
+            customer.setCity(city);
+
+            System.out.println("Customer information updated successfully.");
+        } else {
+            System.out.println("Account not found.");
+        }
+    }
+
+    private BankAccount findBankAccount(String accountNumber) {
+        for (BankAccount bankAccount : bankAccounts) {
+            if (bankAccount.getAccountNumber().equals(accountNumber)) {
+                return bankAccount;
+            }
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        Atm atm = new Atm();
+        atm.start();
+    }
+}
+
+class BankAccount {
+    private String accountNumber;
+    private Customer customer;
+    private double balance;
+    private List<String> transactionHistory;
+
+    public BankAccount(String accountNumber, Customer customer, double balance) {
+        this.accountNumber = accountNumber;
+        this.customer = customer;
+        this.balance = balance;
+        this.transactionHistory = new ArrayList<>();
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+        addTransaction("Deposit: +" + amount);
+    }
+
+    public boolean withdraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            addTransaction("Withdrawal: -" + amount);
+            return true;
+        }
+        return false;
+    }
+
+    public void addTransaction(String transaction) {
+        transactionHistory.add(transaction);
+    }
+
+    public List<String> getTransactionHistory() {
+        return transactionHistory;
+    }
+}
+
+class Customer {
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String postalCode;
+    private String city;
+
+    public Customer(String firstName, String lastName, String address, String postalCode, String city) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.city = city;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+}

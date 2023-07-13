@@ -1,0 +1,24 @@
+package atm;
+
+public class Account extends Client {
+	//attributes
+	private int balance;
+	
+	//constructor
+	public Account() {}
+	
+	public Account(String pName, int pCode, int pBalance) {
+		this.name = pName;
+		this.code = pCode;
+		this.balance = pBalance;
+	}
+	
+	//methods
+	public void setBalance(int pBalance) {
+		this.balance = pBalance;
+	}
+	
+	public int getBalance() {
+		return balance;
+	}
+}

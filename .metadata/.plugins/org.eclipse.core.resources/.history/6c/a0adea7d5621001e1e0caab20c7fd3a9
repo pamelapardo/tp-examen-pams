@@ -1,0 +1,50 @@
+package atm;
+import java.util.Scanner;
+
+public class atm {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Client user1 = new Client("Pamela", "Pardo", "Louis XIV", 6901, "Versailles" );
+		Client user2 = new Client("Mounir", "B", "Louis XIV", 6901, "Versailles" );
+		Client user3 = new Client("Pamela", "Pardo", "Louis XIV", 6901, "Versailles" );
+		Scanner scan = new Scanner(System.in);
+		String input;
+		int parsedInput = 0;
+		
+		
+		System.out.println("Bienvenu sur votre ATM virtuel");
+		
+		
+//		do {
+//			System.out.println("Entrez votre code, client: ");
+//			try {
+//				
+//				input = scan.next();
+//				parsedInput = Integer.parseInt(input);
+//				
+//				if (parsedInput == user.getCode()) {
+//					System.out.println("Vous etes bien connecte sur votre compte, " + input + " !");
+//					System.out.println("Que voulez-vous faire ?");
+//				}
+//				
+//				} catch (java.lang.NumberFormatException e ) {
+//					System.out.println("Veuillez saisir des nombres!");
+//				
+//			}
+//
+//		} while (parsedInput != user.getCode());
+		
+		
+	System.out.println("Choisir l'utilisateur entre:");
+	System.out.println("1 - Pamela");
+	System.out.println("2 - Mounir");
+	input = scan.next();
+		switch(input) {
+		case "1":
+			System.out.println(user1.getName());
+		}
+		
+	}
+
+}

@@ -1,0 +1,62 @@
+package atm;
+import java.util.Scanner;
+
+public class atm {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Client user1 = new Client("Pamela", "Pardo", "Louis XIV", 9001, "Versailles" );
+		Client user2 = new Client("Mounir", "B", "Napoleon", 6904, "Lyon" );
+		Client user3 = new Client("Toto", "Tata", "Marcelo", 3002, "Bolivar" );
+		Scanner scan = new Scanner(System.in);
+		int input;
+		int parsedInput = 0;
+		
+		
+		System.out.println("Bienvenu sur votre ATM virtuel");
+		
+		
+//		do {
+//			System.out.println("Entrez votre code, client: ");
+//			try {
+//				
+//				input = scan.next();
+//				parsedInput = Integer.parseInt(input);
+//				
+//				if (parsedInput == user.getCode()) {
+//					System.out.println("Vous etes bien connecte sur votre compte, " + input + " !");
+//					System.out.println("Que voulez-vous faire ?");
+//				}
+//				
+//				} catch (java.lang.NumberFormatException e ) {
+//					System.out.println("Veuillez saisir des nombres!");
+//				
+//			}
+//
+//		} while (parsedInput != user.getCode());
+		
+		
+	System.out.println("Choisir l'utilisateur entre:");
+	System.out.println("1. Pamela");
+	System.out.println("2. Mounir");
+	System.out.println("2. Toto");
+	System.out.println("");
+	System.out.print("Votre choix: ");
+	input = scan.nextInt();
+		switch(input) {
+		case 1:
+			System.out.println("Bienvenu sur votre compte, " + user1.getName() + " !");
+		case 2: 
+			System.out.println("Bienvenu sur votre compte, " + user2.getName() + " !");
+		case 3:
+			System.out.println("Bienvenu sur votre compte, " + user3.getName() + " !");
+		default:
+			System.out.println("...");
+			System.out.println("Choisisez entre ces propositions, s'il vous plait.");
+			break;
+		}
+		
+		System.out.println("Que voulez vous faire? ");
+	}
+
+}
