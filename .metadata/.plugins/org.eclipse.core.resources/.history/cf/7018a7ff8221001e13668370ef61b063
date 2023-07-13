@@ -1,0 +1,87 @@
+package atm;
+import java.util.Scanner;
+
+public class atm {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Account acc1 = new Account(5600);
+		Account acc2 = new Account(9050);
+		Account acc3 = new Account(3900);
+		Client user1 = new Client("Pamela", "Pardo", "Louis XIV", 9001, "Versailles", acc1);
+		Client user2 = new Client("Mounir", "B", "Napoleon", 6904, "Lyon", acc2 );
+		Client user3 = new Client("Toto", "Tata", "Marcelo", 3002, "Bolivar", acc3 );
+		Scanner scan = new Scanner(System.in);
+		
+		int parsedInput = 0;
+
+
+		System.out.println("Bienvenu sur votre ATM virtuel");
+		System.out.println("Choisir l'utilisateur entre:");
+		System.out.println("1. Pamela");
+		System.out.println("2. Mounir");
+		System.out.println("3. Toto");
+		System.out.println("4. Quitter");
+		System.out.println("");
+		System.out.print("Votre choix: ");
+		int input = scan.nextInt();;
+			switch(input) {
+			case 1:
+				System.out.println("Bienvenu sur votre compte, " + user1.getName() + " !");
+				System.out.println("");
+				userChoice(user1);
+				break;
+			case 2: 
+				System.out.println("Bienvenu sur votre compte, " + user2.getName() + " !");
+				System.out.println("");
+				userChoice(user2);
+				break;
+			case 3:
+				System.out.println("Bienvenu sur votre compte, " + user3.getName() + " !");
+				System.out.println("");
+				userChoice(user3);
+				break; 
+			case 4:
+				System.out.println("Au revoir !");
+				System.exit(1);
+				break;
+			default:
+				System.out.println("...");
+				System.out.println("Choisisez entre ces propositions, s'il vous plait.");
+				break;
+			}
+			
+			
+		}
+			public static void userChoice(Client client) {
+				Scanner scan2 = new Scanner(System.in);
+				
+				Account account1 = new Account( );
+				
+				
+				System.out.println("Que voulez vous faire? ");
+				System.out.println("");
+				System.out.println("1. Consulter mon solde.");
+				System.out.println("2. Deposer");
+				System.out.println("3. Retirer");
+				System.out.println("4. Quitter l'ATM");
+				int input2 = scan2.nextInt();
+				switch(input2) {
+				case 1:
+					System.out.println("Vous avez " + client.account + " dans votre compte bancaire");
+					System.out.println("");
+					break;
+				case 2:
+					
+				case 4:
+					System.out.println("Au revoir !");
+					System.exit(1);
+					break;
+				default:
+					System.out.println("...");
+					System.out.println("Choisisez entre ces propositions, s'il vous plait.");
+					break;
+				}
+				
+			}
+}

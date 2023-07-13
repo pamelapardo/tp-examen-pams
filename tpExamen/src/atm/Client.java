@@ -7,19 +7,14 @@ public class Client {
 	private String adress;
 	private int postalCode;
 	private String city;
-	Account account;
 	
-	//constructeurs
-	public Client() {};
-	
-	
-	public Client(String pName, String pLastname, String pAdress, int pPostalCode, String pCity, Account pAccount) {
+	//constructeur
+	public Client(String pName, String pLastname, String pAdress, int pPostalCode, String pCity) {
 		this.name = pName;
 		this.lastname = pLastname;
 		this.adress = pAdress;
 		this.postalCode = pPostalCode;
 		this.city = pCity;
-		this.account = pAccount;
 	}
 	
 	//methodes
@@ -58,11 +53,5 @@ public class Client {
 		this.city = pCity;
 	}
 	
-	public void setName(Account pAccount) {
-		this.account = pAccount;
-	}
-	
-	public Account getAccount() {
-		return account;
-	}
+
 }
